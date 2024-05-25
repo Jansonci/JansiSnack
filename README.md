@@ -22,20 +22,18 @@
 
 <table>
     <tr>
-        <td><img src="zout/docs/images/Screenshot_20240525_101255.png"/></td>
-        <td><img src="zout/docs/images/News.png"/></td>
+        <td><img src="images/Screenshot_20240525_101255.png"/></td>
+        <td><img src="images/News.png"/></td>
+        <td><img src="images/Cate.png"/></td>
     </tr>
     <tr>
-        <td><img src="zout/docs/images/Cate.png"/></td>
-        <td><img src="zout/docs/images/cart.png"/></td>
-    </tr>
-    <tr>
-       <td><img src="zout/docs/images/prof.png"/></td>
-       <td><img src="zout/docs/images/dessert.png"/></td>
+        <td><img src="images/cart.png"/></td>
+        <td><img src="images/prof.png"/></td>
+        <td><img src="images/dessert.png"/></td>
     </tr>
      <tr>
-       <td><img src="zout/docs/images/Articlle.png"/></td>
-       <td><img src="zout/docs/images/locate.png"/></td>
+       <td><img src="images/Articlle.png"/></td>
+       <td><img src="images/locate.png"/></td>
     </tr>
 </table>
 
