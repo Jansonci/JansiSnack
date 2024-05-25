@@ -34,6 +34,7 @@
      <tr>
        <td><img src="images/Articlle.png"/></td>
        <td><img src="images/locate.png"/></td>
+       <td><img src="images/login.png"/></td>
     </tr>
 </table>
 
