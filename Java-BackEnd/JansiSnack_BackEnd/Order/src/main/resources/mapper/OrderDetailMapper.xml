@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.wetech.order.producer.mapper.OrderDetailMapper">
+
+    <resultMap id="BaseResultMap" type="tech.wetech.order.producer.model.OrderDetail">
+            <id property="orderDetailId" column="order_detail_id" jdbcType="BIGINT"/>
+            <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="dessertId" column="dessert_id" jdbcType="BIGINT"/>
+            <result property="quantity" column="quantity" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      order_detailId,order_id,dessert_id,
+        quantity
+    </sql>
+
+    <!-- 添加基于orderId查询OrderDetail的SQL -->
+    <select id="selectByOrderId" resultMap="BaseResultMap">
+      SELECT <include refid="Base_Column_List"/>
+      FROM order_detail
+      WHERE order_id = #{orderId}
+    </select>
+</mapper>

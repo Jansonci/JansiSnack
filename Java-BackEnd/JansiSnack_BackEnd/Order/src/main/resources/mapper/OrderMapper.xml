@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.wetech.order.producer.mapper.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="tech.wetech.order.producer.model.Order">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="customerId" column="customer_id" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="totalAmount" column="total_amount" jdbcType="DECIMAL"/>
+            <result property="orderDate" column="order_date" jdbcType="TIMESTAMP"/>
+            <result property="requireTime" column="require_time" jdbcType="BIGINT"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,customer_id,address,
+        total_amount,order_date,require_time
+    </sql>
+
+    <!-- OrderMapper.xml -->
+    <resultMap id="OrderWithDetailsMap" type="tech.wetech.order.producer.model.Order">
+      <id property="id" column="id"/>
+      <result property="customerId" column="customer_id"/>
+      <result property="address" column="address"/>
+      <result property="totalAmount" column="total_amount"/>
+      <result property="orderDate" column="order_date"/>
+      <result property="requireTime" column="require_time" jdbcType="BIGINT"/>
+
+
+      <!-- 添加关联的OrderDetails -->
+      <collection property="orderDetail" ofType="tech.wetech.order.producer.model.OrderDetail"
+                  column="id" select="tech.wetech.order.producer.mapper.OrderDetailMapper.selectByOrderId"/>
+    </resultMap>
+
+    <!-- OrderMapper.xml -->
+    <select id="selectOrderWithDetails" resultMap="OrderWithDetailsMap">
+      SELECT <include refid="Base_Column_List"/>
+      FROM order_info
+      WHERE id = #{orderId}
+    </select>
+
+    <select id="selectOrdersWithDetailsByUser" resultMap="OrderWithDetailsMap">
+      SELECT o.id, o.customer_id, o.order_date, o.require_time,o.total_amount,o.state,o.address,
+      d.order_detailId, d.order_id, d.dessert_id, d.quantity
+      FROM order_info o
+      LEFT JOIN `orderservice`.order_detail d ON o.id = d.order_id
+      WHERE o.customer_id = #{userId}
+      ORDER BY o.order_date ASC  <!-- or DESC for descending order -->
+    </select>
+
+  <select id="selectOrderWithDetailsByOrderId" resultMap="OrderWithDetailsMap">
+    SELECT o.id, o.customer_id, o.order_date, o.require_time,o.total_amount,o.state,o.address,
+    d.order_detailId, d.order_id, d.dessert_id, d.quantity
+    FROM order_info o
+    LEFT JOIN `orderservice`.order_detail d ON o.id = d.order_id
+    WHERE o.id = #{orderId}
+  </select>
+
+  <delete id="deleteOrderWithDetailsByOrderId">
+    <!-- 首先删除订单明细 -->
+    DELETE FROM `orderservice`.order_detail
+    WHERE order_id = #{orderId};
+
+    <!-- 然后删除订单本身 -->
+    DELETE FROM order_info
+    WHERE id = #{orderId};
+  </delete>
+
+</mapper>

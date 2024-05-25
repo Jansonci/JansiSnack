@@ -1,0 +1,511 @@
+
+{
+  "_id": {
+    "$oid": "6632eec910e98a5f2470dde5"
+  },
+  "id": "55db18283aca",
+  "title": "Collections and sequences in Kotlin",
+  "subtitle": "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of working with collections based on how they’re evaluated: eagerly — with Collections, and lazily — with Sequences. Continue reading to find out what’s the difference between the two, which one you should use and when, and what the performance implications of each are.",
+  "url": "https://medium.com/androiddevelopers/collections-and-sequences-in-kotlin-55db18283aca",
+  "publication": {
+    "name": "Android Developers",
+    "logoUrl": "https://cdn-images-1.medium.com/max/258/1*u7oZc2_5mrkcFaxkXEyfYA@2x.png"
+  },
+  "metadata": {
+    "author": {
+      "name": "Florina",
+      "url": ""
+    },
+    "date": "July 24",
+    "readTimeMinutes": 4
+  },
+  "paragraphs": [
+    {
+      "type": "Text",
+      "text": "Working with collections is a common task and the Kotlin Standard Library offers many great utility functions. It also offers two ways of working with collections based on how they’re evaluated: eagerly — with Collections, and lazily — with Sequences. Continue reading to find out what’s the difference between the two, which one you should use and when, and what the performance implications of each are.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 210,
+          "end": 220
+        },
+        {
+          "type": "Code",
+          "start": 241,
+          "end": 249
+        },
+        {
+          "type": "Link",
+          "start": 210,
+          "end": 221,
+          "href": "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/index.html"
+        },
+        {
+          "type": "Link",
+          "start": 241,
+          "end": 250,
+          "href": "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/index.html"
+        },
+        {
+          "type": "Bold",
+          "start": 130,
+          "end": 134
+        },
+        {
+          "type": "Bold",
+          "start": 195,
+          "end": 202
+        },
+        {
+          "type": "Bold",
+          "start": 227,
+          "end": 233
+        },
+        {
+          "type": "Italic",
+          "start": 130,
+          "end": 134
+        }
+      ]
+    },
+    {
+      "type": "Header",
+      "text": "Collections vs sequences"
+    },
+    {
+      "type": "Text",
+      "text": "The difference between eager and lazy evaluation lies in when each transformation on the collection is performed.",
+      "markups": [
+        {
+          "type": "Italic",
+          "start": 57,
+          "end": 61
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Collections are eagerly evaluated — each operation is performed when it’s called and the result of the operation is stored in a new collection. The transformations on collections are inline functions. For example, looking at how map is implemented, we can see that it’s an inline function, that creates a new ArrayList:",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 229,
+          "end": 232
+        },
+        {
+          "type": "Code",
+          "start": 273,
+          "end": 279
+        },
+        {
+          "type": "Code",
+          "start": 309,
+          "end": 318
+        },
+        {
+          "type": "Link",
+          "start": 183,
+          "end": 199,
+          "href": "https://kotlinlang.org/docs/reference/inline-functions.html"
+        },
+        {
+          "type": "Link",
+          "start": 229,
+          "end": 232,
+          "href": "https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/common/src/generated/_Collections.kt#L1312"
+        },
+        {
+          "type": "Bold",
+          "start": 0,
+          "end": 12
+        },
+        {
+          "type": "Italic",
+          "start": 16,
+          "end": 23
+        }
+      ]
+    },
+    {
+      "type": "CodeBlock",
+      "text": {
+        "text": "public inline fun <T, R> Iterable<T>.map(transform: (T) -> R): List<R> {\n return mapTo(ArrayList<R>(collectionSizeOrDefault(10)), transform)\n}"
+      },
+      "markups": [
+        {
+          "type": "Bold",
+          "start": 7,
+          "end": 13
+        },
+        {
+          "type": "Bold",
+          "start": 88,
+          "end": 97
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Sequences are lazily evaluated. They have two types of operations: intermediate and terminal. Intermediate operations are not performed on the spot; they’re just stored. Only when a terminal operation is called, the intermediate operations are triggered on each element in a row and finally, the terminal operation is applied. Intermediate operations (like map, distinct, groupBy etc) return another sequence whereas terminal operations (like first, toList, count etc) don’t.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 357,
+          "end": 360
+        },
+        {
+          "type": "Code",
+          "start": 362,
+          "end": 370
+        },
+        {
+          "type": "Code",
+          "start": 372,
+          "end": 379
+        },
+        {
+          "type": "Code",
+          "start": 443,
+          "end": 448
+        },
+        {
+          "type": "Code",
+          "start": 450,
+          "end": 456
+        },
+        {
+          "type": "Code",
+          "start": 458,
+          "end": 463
+        },
+        {
+          "type": "Bold",
+          "start": 0,
+          "end": 9
+        },
+        {
+          "type": "Bold",
+          "start": 67,
+          "end": 79
+        },
+        {
+          "type": "Bold",
+          "start": 84,
+          "end": 92
+        },
+        {
+          "type": "Bold",
+          "start": 254,
+          "end": 269
+        },
+        {
+          "type": "Italic",
+          "start": 14,
+          "end": 20
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Sequences don’t hold a reference to the items of the collection. They’re created based on the iterator of the original collection and keep a reference to all the intermediate operations that need to be performed."
+    },
+    {
+      "type": "Text",
+      "text": "Unlike transformations on collections, intermediate transformations on sequences are not inline functions — inline functions cannot be stored and sequences need to store them. Looking at how an intermediate operation like map is implemented, we can see that the transform function is kept in a new instance of a Sequence:",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 222,
+          "end": 225
+        },
+        {
+          "type": "Code",
+          "start": 312,
+          "end": 320
+        },
+        {
+          "type": "Link",
+          "start": 222,
+          "end": 225,
+          "href": "https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/common/src/generated/_Sequences.kt#L860"
+        }
+      ]
+    },
+    {
+      "type": "CodeBlock",
+      "text": "public fun <T, R> Sequence<T>.map(transform: (T) -> R): Sequence<R>{\nreturn TransformingSequence(this, transform)\n }",
+      "markups": [
+        {
+          "type": "Bold",
+          "start": 85,
+          "end": 105
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "A terminal operation, like first, iterates through the elements of the sequence until the predicate condition is matched.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 27,
+          "end": 32
+        },
+        {
+          "type": "Link",
+          "start": 27,
+          "end": 32,
+          "href": "https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/common/src/generated/_Sequences.kt#L117"
+        }
+      ]
+    },
+    {
+      "type": "CodeBlock",
+      "text": "public inline fun <T> Sequence<T>.first(predicate: (T) -> Boolean): T {\nfor (element in this) if (predicate(element)) return element\nthrow NoSuchElementException(“Sequence contains no element matching the predicate.”)\n}"
+    },
+    {
+      "type": "Text",
+      "text": "If we look at how a sequence like TransformingSequence (used in the map above) is implemented, we’ll see that when next is called on the sequence iterator, the transformation stored is also applied.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 34,
+          "end": 54
+        },
+        {
+          "type": "Code",
+          "start": 68,
+          "end": 71
+        }
+      ]
+    },
+    {
+      "type": "CodeBlock",
+      "text": "internal class TransformingIndexedSequence<T, R> \nconstructor(private val sequence: Sequence<T>, private val transformer: (Int, T) -> R) : Sequence<R> {",
+      "markups": [
+        {
+          "type": "Bold",
+          "start": 109,
+          "end": 120
+        }
+      ]
+    },
+    {
+      "type": "CodeBlock",
+      "text": "override fun iterator(): Iterator<R> = object : Iterator<R> {\n…\noverride fun next(): R {\nreturn transformer(checkIndexOverflow(index++), iterator.next())\n}\n …\n}",
+      "markups": [
+        {
+          "type": "Bold",
+          "start": 83,
+          "end": 89
+        },
+        {
+          "type": "Bold",
+          "start": 107,
+          "end": 118
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Independent of whether you’re using collections or sequences, the Kotlin Standard Library offers quite a wide range of operations for both, like find, filter, groupBy and others. Make sure you check them out, before implementing your own version of these.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 145,
+          "end": 149
+        },
+        {
+          "type": "Code",
+          "start": 151,
+          "end": 157
+        },
+        {
+          "type": "Code",
+          "start": 159,
+          "end": 166
+        },
+        {
+          "type": "Link",
+          "start": 193,
+          "end": 207,
+          "href": "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/#functions"
+        }
+      ]
+    },
+    {
+      "type": "Header",
+      "text": "Collections and sequences"
+    },
+    {
+      "type": "Text",
+      "text": "Let’s say that we have a list of objects of different shapes. We want to make the shapes yellow and then take the first square shape."
+    },
+    {
+      "type": "Text",
+      "text": "Let’s see how and when each operation is applied for collections and when for sequences"
+    },
+    {
+      "type": "Subhead",
+      "text": "Collections"
+    },
+    {
+      "type": "Text",
+      "text": "map is called — a new ArrayList is created. We iterate through all items of the initial collection, transform it by copying the original object and changing the color, then add it to the new list.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 0,
+          "end": 3
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "first is called — we iterate through each item until the first square is found",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "type": "Subhead",
+      "text": "Sequences"
+    },
+    {
+      "type": "Bullet",
+      "text": "asSequence — a sequence is created based on the Iterator of the original collection",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 0,
+          "end": 10
+        }
+      ]
+    },
+    {
+      "type": "Bullet",
+      "text": "map is called — the transformation is added to the list of operations needed to be performed by the sequence but the operation is NOT performed",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 0,
+          "end": 3
+        },
+        {
+          "type": "Bold",
+          "start": 130,
+          "end": 133
+        }
+      ]
+    },
+    {
+      "type": "Bullet",
+      "text": "first is called — this is a terminal operation, so, all the intermediate operations are triggered, on each element of the collection. We iterate through the initial collection applying map and then first on each of them. Since the condition from first is satisfied by the 2nd element, then we no longer apply the map on the rest of the collection.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+
+    {
+      "type": "Text",
+      "text": "When working with sequences no intermediate collection is created and since items are evaluated one by one, map is only performed on some of the inputs."
+    },
+    {
+      "type": "Header",
+      "text": "Performance"
+    },
+    {
+      "type": "Subhead",
+      "text": "Order of transformations"
+    },
+    {
+      "type": "Text",
+      "text": "Independent of whether you’re using collections or sequences, the order of transformations matters. In the example above, first doesn’t need to happen after map since it’s not a consequence of the map transformation. If we reverse the order of our business logic and call first on the collection and then transform the result, then we only create one new object — the yellow square. When using sequences — we avoid creating 2 new objects, when using collections, we avoid creating an entire new list.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 122,
+          "end": 127
+        },
+        {
+          "type": "Code",
+          "start": 157,
+          "end": 160
+        },
+        {
+          "type": "Code",
+          "start": 197,
+          "end": 200
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Because terminal operations can finish processing early, and intermediate operations are evaluated lazily, sequences can, in some cases, help you avoid doing unnecessary work compared to collections. Make sure you always check the order of the transformations and the dependencies between them!"
+    },
+    {
+      "type": "Subhead",
+      "text": "Inlining and large data sets consequences"
+    },
+    {
+      "type": "Text",
+      "text": "Collection operations use inline functions, so the bytecode of the operation, together with the bytecode of the lambda passed to it will be inlined. Sequences don’t use inline functions, therefore, new Function objects are created for each operation.",
+      "markups": [
+        {
+          "type": "Code",
+          "start": 202,
+          "end": 210
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "On the other hand, collections create a new list for every transformation while sequences just keep a reference to the transformation function."
+    },
+    {
+      "type": "Text",
+      "text": "When working with small collections, with 1–2 operators, these differences don’t have big implications so working with collections should be ok. But, when working with large lists the intermediate collection creation can become expensive; in such cases, use sequences.",
+      "markups": [
+        {
+          "type": "Bold",
+          "start": 18,
+          "end": 35
+        },
+        {
+          "type": "Bold",
+          "start": 119,
+          "end": 130
+        },
+        {
+          "type": "Bold",
+          "start": 168,
+          "end": 179
+        },
+        {
+          "type": "Bold",
+          "start": 258,
+          "end": 267
+        }
+      ]
+    },
+    {
+      "type": "Text",
+      "text": "Unfortunately, I’m not aware of any benchmarking study done that would help us get a better understanding on how the performance of collections vs sequences is affected with different sizes of collections or operation chains."
+    },
+    {
+      "type": "Text",
+      "text": "Collections eagerly evaluate your data while sequences do so lazily. Depending on the size of your data, pick the one that fits best: collections — for small lists or sequences — for larger ones, and pay attention to the order of the transformations."
+    }
+  ],
+  "image_id": "R.drawable.post_5",
+  "image_thumb_id": "R.drawable.post_5_thumb",
+  "is_collected": true
+}
