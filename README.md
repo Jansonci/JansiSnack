@@ -27,15 +27,13 @@
         <td><img src="images/Cate.png"/></td>
     </tr>
     <tr>
-        <td><img src="zout/docs/images/cart.png"/></td>
-    </tr>
-    <tr>
-       <td><img src="zout/docs/images/prof.png"/></td>
-       <td><img src="zout/docs/images/dessert.png"/></td>
+        <td><img src="images/cart.png"/></td>
+        <td><img src="images/prof.png"/></td>
+        <td><img src="images/dessert.png"/></td>
     </tr>
      <tr>
-       <td><img src="zout/docs/images/Articlle.png"/></td>
-       <td><img src="zout/docs/images/locate.png"/></td>
+       <td><img src="images/Articlle.png"/></td>
+       <td><img src="images/locate.png"/></td>
     </tr>
 </table>
 
