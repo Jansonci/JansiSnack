@@ -24,9 +24,9 @@
     <tr>
         <td><img src="images/Screenshot_20240525_101255.png"/></td>
         <td><img src="images/News.png"/></td>
+        <td><img src="images/Cate.png"/></td>
     </tr>
     <tr>
-        <td><img src="zout/docs/images/Cate.png"/></td>
         <td><img src="zout/docs/images/cart.png"/></td>
     </tr>
     <tr>
