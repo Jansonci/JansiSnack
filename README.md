@@ -22,8 +22,8 @@
 
 <table>
     <tr>
-        <td><img src="zout/docs/images/Screenshot_20240525_101255.png"/></td>
-        <td><img src="zout/docs/images/News.png"/></td>
+        <td><img src="images/Screenshot_20240525_101255.png"/></td>
+        <td><img src="images/News.png"/></td>
     </tr>
     <tr>
         <td><img src="zout/docs/images/Cate.png"/></td>
