@@ -36,6 +36,11 @@
        <td><img src="images/locate.png"/></td>
        <td><img src="images/login.png"/></td>
     </tr>
+     <tr>
+       <td><img src="images/Edit.png"/></td>
+       <td><img src="images/Search.png"/></td>
+       <td><img src="images/pay.png"/></td>
+    </tr>
 </table>
 
 ## 软件需求
