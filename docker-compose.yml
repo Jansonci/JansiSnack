@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  consul:
+    image: consul
+    ports:
+      - "8500:8500"
+    networks:
+      - Jansonci
+
+  dessert:
+    image: dessert:latest
+    build: .
+    ports:
+      - "80:80"
+    networks:
+      - Jansonci
+    depends_on:
+      - consul
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  user:
+    image: user:latest
+    build: .
+    ports:
+      - "81:81"
+    networks:
+      - Jansonci
+    depends_on:
+      - consul
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  order:
+    image: order:latest
+    build: .
+    ports:
+      - "8081:8081"
+    networks:
+      - Jansonci
+    depends_on:
+      - consul
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+  gateway1:
+    image: gateway1:latest
+    build: .
+    ports:
+      - "9527:9527"
+    networks:
+      - Jansonci
+    depends_on:
+      - consul
+    environment:
+      - CONSUL_HOST=consul
+      - CONSUL_PORT=8500
+
+networks:
+  Jansonci:
