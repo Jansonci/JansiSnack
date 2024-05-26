@@ -19,14 +19,11 @@ package com.example.jetsnack.ui.home.Profile
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,7 +64,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
@@ -98,9 +94,6 @@ import com.example.jetsnack.model.Snack
 import com.example.jetsnack.model.User
 import com.example.jetsnack.ui.components.HighlightSnackItem
 import com.example.jetsnack.ui.components.JetsnackScaffold
-import com.example.jetsnack.ui.components.JetsnackSurface
-import com.example.jetsnack.ui.components.fadeInDiagonalGradientBorder
-import com.example.jetsnack.ui.components.offsetGradientBackground
 import com.example.jetsnack.ui.home.HomeSections
 import com.example.jetsnack.ui.home.JetsnackBottomBar
 import com.example.jetsnack.ui.theme.JetsnackTheme
@@ -590,15 +583,6 @@ private fun InterestsAdaptiveContentLayout(
 @Composable
 fun Photo( profileViewModel: ProfileViewModel,
     modifier: Modifier = Modifier) {
-//    JetsnackSurface(
-//        color = Color.LightGray,
-//        elevation = 0.dp,
-//        shape = CircleShape,
-//        modifier = modifier
-//            .size(140.dp, 140.dp)
-//            .clip(CircleShape)
-//            .clip(androidx.compose.material3.MaterialTheme.shapes.small)
-//    ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(profileViewModel.userInfo.value?.asJsonObject?.get("avatar")?.takeIf { it !is JsonNull }?.asString ?:"",)
@@ -607,71 +591,10 @@ fun Photo( profileViewModel: ProfileViewModel,
             contentDescription = null, // decorative
             placeholder = painterResource(R.drawable.placeholder),
             modifier = modifier
-//                .fillMaxSize()
                 .size(140.dp, 140.dp)
                 .clip(CircleShape)
                 .clip(androidx.compose.material3.MaterialTheme.shapes.small)
         )
-//    }
-}
-
-@Composable
-fun FilterChip(
-//    filter: Filter,
-    modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.small
-) {
-//    val (selected, setSelected) = filter.enabled
-    val backgroundColor by animateColorAsState(
-        JetsnackTheme.colors.uiBackground,
-        label = "background color"
-    )
-    val border = Modifier.fadeInDiagonalGradientBorder(
-        showBorder = true,
-        colors = JetsnackTheme.colors.interactiveSecondary,
-        shape = shape
-    )
-    val textColor by animateColorAsState(
-        JetsnackTheme.colors.textSecondary,
-        label = "text color"
-    )
-
-    JetsnackSurface(
-        modifier = modifier,
-        color = backgroundColor,
-        contentColor = textColor,
-        shape = shape,
-        elevation = 2.dp
-    ) {
-        val interactionSource = remember { MutableInteractionSource() }
-
-        val pressed by interactionSource.collectIsPressedAsState()
-        val backgroundPressed =
-            if (pressed) {
-                Modifier.offsetGradientBackground(
-                    JetsnackTheme.colors.interactiveSecondary,
-                    200f,
-                    0f
-                )
-            } else {
-                Modifier.background(Color.Transparent)
-            }
-        Box(
-            modifier = Modifier
-                .then(backgroundPressed)
-                .then(border),
-        ) {
-            Text(
-                text = "House",
-                style = MaterialTheme.typography.button,
-                maxLines = 1,
-                modifier = Modifier.padding(
-                    horizontal = 20.dp,
-                    vertical = 6.dp
-                )
-            )
-        }
-    }
 }
 
 @Composable
@@ -679,25 +602,10 @@ fun Edit(
     onNavigateToEdit: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-//        Box(modifier = modifier
-//            .height(50.dp)
-//            .width(120.dp)
-//            .clip(Shapes.small)
-//            .border(2.dp, Color.DarkGray, Shapes.small)
-//            .padding(10.dp)
-//            .clickable(
-//                onClick = onNavigateToEdit,
-//                indication = rememberRipple(bounded = true),  // 使用有界的涟漪效果
-//                interactionSource = remember { MutableInteractionSource() })
-//        ){
-//            Text(text = "编辑资料",style = TextStyle(fontSize =15.sp), modifier = Modifier.align(Alignment.Center))
-//        }
         Button(onClick =onNavigateToEdit, modifier = modifier
             .offset(y = 6.dp)
             .height(70.dp)
             .width(135.dp)
-//            .clip(Shapes.small)
-//            .border(2.dp, Color.DarkGray, Shapes.small)
             .padding(10.dp),
             shape = Shapes.small,
             colors = ButtonDefaults.buttonColors(
@@ -707,7 +615,7 @@ fun Edit(
         ) {
                         Text(text = "编辑资料",
                             fontFamily = FontFamily(Font(R.font.montserrat_semibold)),
-                            style = androidx.compose.material.MaterialTheme.typography.subtitle1,
+                            style = MaterialTheme.typography.subtitle1,
                             color = JetsnackTheme.colors.textSecondary,
                             modifier = Modifier.align(Alignment.CenterVertically))
         }
