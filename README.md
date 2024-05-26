@@ -7,13 +7,17 @@
 ## 主要特性
 * 后端使用SpringBoot3.0、SpringCloud、Golang Echo等主流框架构建
 * 前端使用Android JetPack Compose基于安卓官方案例JetSnack拓展开发实现
+* 使用Material/Material3混合进行界面设计并使用Room数据库实现应用端缓存
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
+* 提供登录注册功能，并使用MD5进行密码加密
 * 使用Redis实现购物车模型以及分布式锁
 * 使用Kafka实现订单的实时高速处理
 * 使用Nginx作为反向代理服务器实现静态资源的存储、缓存以及请求限流
 * 调用Google和Baidu的api实现定位功能
 * 通过Spring Cloud Gateway、Spring MVC、Nginx协同提供安全防护和高可用性
-* 新闻资讯模块使用Golang Echo构建并以MongoDB为持久层并使用Websocket技术实现收藏功能的ui实时更新，严格遵守单项数据流动原则
+* 使用Seata处理订单场景中的分布式事务
+* 新闻资讯模块使用Golang Echo构建并以MongoDB为持久层并使用Websocket技术实现收藏功能的ui实时更新，符合单项数据流动原则
+* 附带docker Compose文件，实现容器快速部署
 * 统一对象存储封装，实现应用和上传文件位置隔离，支持本地上传&所有符合S3标准（阿里云、华为云、MinIO等）的对象存储
 
 ## 项目预览
@@ -66,10 +70,9 @@
 
 ## 待办列表
 
-- [x] "探索模块"
-
-- [x] 文章发布功能
-
+- [ ] "探索模块"
+- [ ] 文章发布功能
+- [ ] 商户端模块
 - [ ] 国际化
 
 - [ ] 更多功能请 [Issues](https://github.com/cjbi/admin3/issues) 留言
