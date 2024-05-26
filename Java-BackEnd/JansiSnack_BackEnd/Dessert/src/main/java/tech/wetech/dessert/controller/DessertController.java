@@ -26,7 +26,7 @@ public class DessertController {
   @Cacheable(value = "dessert", key = "#dessertId", unless = "#result == null")
   @GetMapping("/{dessertId}")
   public ResponseEntity<DessertDTO> findDessertByName(@PathVariable Long dessertId) {
-    return ResponseEntity.ok(dessertService.findDessertByName(dessertId));
+    return ResponseEntity.ok(dessertService.findDessertByNameWithRedis(dessertId));
   }
 
   @GetMapping("/all")

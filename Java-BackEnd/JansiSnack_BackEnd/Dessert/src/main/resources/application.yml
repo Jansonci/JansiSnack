@@ -24,6 +24,18 @@ spring:
     web:
       pageable:
         one-indexed-parameters: true
+#  data:
+    redis:
+      database: 0
+      host: 192.168.233.100
+      password: "123"
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
   profiles:
     include: biz
 

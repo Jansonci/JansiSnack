@@ -3,6 +3,8 @@ package tech.wetech.dessert.service;
 import io.seata.spring.annotation.GlobalTransactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.wetech.api.common.BusinessException;
@@ -17,6 +19,7 @@ import tech.wetech.dessert.repository.LifestyleRepository;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static tech.wetech.api.common.CommonResultStatus.RECORD_NOT_EXIST;
@@ -30,7 +33,12 @@ public class DessertService {
   @PersistenceContext
   private EntityManager entityManager;
 
+  @Autowired
+  private RedisTemplate<String, Object> redisTemplate;
+
   public final DessertRepository dessertRepository;
+
+  private static final String DESSERT_CACHE_PREFIX = "dessert:";
 
   public final CategoryRepository categoryRepository;
   public final LifestyleRepository lifestyleRepository;
@@ -44,6 +52,24 @@ public class DessertService {
   public DessertDTO findDessertByName(Long name){
     Dessert d = dessertRepository.findById(name).orElseThrow(() -> new BusinessException(RECORD_NOT_EXIST));
     return d.toDessertDTO();
+  }
+
+  public DessertDTO findDessertByNameWithRedis(Long name) {
+    // 从Redis缓存中获取数据
+    String cacheKey = DESSERT_CACHE_PREFIX + name;
+    DessertDTO dessertDTO = (DessertDTO) redisTemplate.opsForValue().get(cacheKey);
+
+    if (dessertDTO == null) {
+      // 如果缓存中没有数据，则从数据库中获取
+      Dessert dessert = dessertRepository.findById(name)
+        .orElseThrow(() -> new BusinessException(RECORD_NOT_EXIST));
+      dessertDTO = dessert.toDessertDTO();
+
+      // 将数据存储到Redis缓存中，设置缓存时间为1小时
+      redisTemplate.opsForValue().set(cacheKey, dessertDTO, 1, TimeUnit.HOURS);
+    }
+
+    return dessertDTO;
   }
 
   public List<DessertDTO> findAllDesserts() {
