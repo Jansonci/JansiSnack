@@ -15,6 +15,7 @@
 * 通过Spring Cloud Gateway、Spring MVC、Nginx协同提供安全防护和高可用性
 * 使用Seata处理订单场景中的分布式事务
 * 新闻资讯模块使用Golang Echo构建并以MongoDB为持久层并使用Websocket技术实现收藏功能的ui实时更新，严格遵守单项数据流动原则
+* 附带docker Compose文件，实现容器快速部署
 * 统一对象存储封装，实现应用和上传文件位置隔离，支持本地上传&所有符合S3标准（阿里云、华为云、MinIO等）的对象存储
 
 ## 项目预览
