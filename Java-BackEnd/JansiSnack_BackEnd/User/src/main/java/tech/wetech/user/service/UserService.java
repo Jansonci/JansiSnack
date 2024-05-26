@@ -59,7 +59,9 @@ public class UserService {
       User.Gender gender = fieldValue.equals("男") ? User.Gender.MALE : User.Gender.FEMALE;
       userRepository.updateUserField(id, fieldName, gender);
     }
-    else userRepository.updateUserField(id, fieldName, fieldValue);
+    else {
+        userRepository.updateUserField(id, fieldName, fieldValue);
+    }
   }
 
   @Transactional

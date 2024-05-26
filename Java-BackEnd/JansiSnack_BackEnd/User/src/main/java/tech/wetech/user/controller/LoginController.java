@@ -45,7 +45,9 @@ public class LoginController {
        sessionService.creatCredential(SecurityUtil.md5(signUpRequest.username,signUpRequest.password), signUpRequest.username, UserCredential.IdentityType.PASSWORD, user);
        return login(new LoginRequest(signUpRequest.username,signUpRequest.password));
      }
-     else throw new UserException(CommonResultStatus.ALLREADYEXIST);
+     else {
+         throw new UserException(CommonResultStatus.ALLREADYEXIST);
+     }
   }
 
   @SecurityRequirement(name = "bearerAuth")

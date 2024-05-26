@@ -18,6 +18,7 @@ public record DessertDTO(Long id,
                          Double rating,
                          String imageUrl,
                          String region,
+                         Integer storage,
                          List<String> ingredients
                          ) {
 

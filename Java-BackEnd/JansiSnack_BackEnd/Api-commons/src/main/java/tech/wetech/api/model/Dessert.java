@@ -133,6 +133,7 @@ public class Dessert {
       rating,
       imageUrl,
       region,
+      storage,
       ingredients.stream().map(Ingredient::getName).collect(Collectors.toList())
     );
   }
