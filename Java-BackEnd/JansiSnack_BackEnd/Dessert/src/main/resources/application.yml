@@ -11,7 +11,7 @@ spring:
       hibernate.auto_quote_keyword: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/dessert?characterEncoding=utf8
+    url: jdbc:mysql://192.168.142.1:3307/dessert?characterEncoding=utf8
     username: root
     password: 123456
   sql:
@@ -79,9 +79,6 @@ seata:
       namespace: ""
       group: SEATA_GROUP
       application: seata-server
-      #    type: consul
-#    consul:
-#      server-addr: 127.0.0.1:8500
   tx-service-group: default_tx_group # 事务组，由它获得TC服务的集群名称
   service:
     vgroup-mapping: # 点击源码分析

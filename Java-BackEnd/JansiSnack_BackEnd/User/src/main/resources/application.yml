@@ -34,13 +34,16 @@ spring:
   profiles:
     include: biz
   cloud:
-    consul:
-#      host: 192.168.233.100
-      host: localhost
-      port: 8500
+#    consul:
+##      host: 192.168.233.100
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        prefer-ip-address: true #优先使用服务ip进行注册
+#        service-name: ${spring.application.name}
+    nacos:
       discovery:
-        prefer-ip-address: true #优先使用服务ip进行注册
-        service-name: ${spring.application.name}
+        server-addr: localhost:8848
     openfeign:
       client:
         config:
@@ -73,9 +76,12 @@ spring:
 
 seata:
   registry:
-    type: consul
-    consul:
-      server-addr: 127.0.0.1:8500
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: ""
+      group: SEATA_GROUP
+      application: seata-server
   tx-service-group: default_tx_group # 事务组，由它获得TC服务的集群名称
   service:
     vgroup-mapping: # 点击源码分析

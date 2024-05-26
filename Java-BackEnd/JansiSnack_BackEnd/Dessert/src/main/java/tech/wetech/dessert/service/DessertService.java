@@ -1,5 +1,6 @@
 package tech.wetech.dessert.service;
 
+import io.seata.spring.annotation.GlobalTransactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;

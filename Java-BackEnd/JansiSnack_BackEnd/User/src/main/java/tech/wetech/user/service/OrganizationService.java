@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author cjbi
+ * @author Jansonci
  */
 @Repository
 public class OrganizationService {

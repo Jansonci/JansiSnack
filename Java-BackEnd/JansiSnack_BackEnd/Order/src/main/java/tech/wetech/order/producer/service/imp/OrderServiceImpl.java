@@ -21,7 +21,6 @@ import java.util.List;
 */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
-
     @Autowired
     private OrderDetailService orderDetailService; // 假设你有一个OrderDetailService来处理订单详情
 
