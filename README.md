@@ -10,10 +10,10 @@
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
 * 使用Redis实现购物车模型以及分布式锁
 * 使用Kafka实现订单的实时高速处理
-* 使用Nginx作为反向代理服务器实现静态资源的存储以、缓存以及请求限流
+* 使用Nginx作为反向代理服务器实现静态资源的存储、缓存以及请求限流
 * 调用Google和Baidu的api实现定位功能
 * 通过Spring Cloud Gateway、Spring MVC、Nginx协同提供安全防护和高可用性
-* 新闻资讯模块使用Golang Echo构建并以MongoDB为持久层并使用Websocket技术实现ui的实时更新，严格遵守单项数据流动原则
+* 新闻资讯模块使用Golang Echo构建并以MongoDB为持久层并使用Websocket技术实现收藏功能的ui实时更新，严格遵守单项数据流动原则
 * 统一对象存储封装，实现应用和上传文件位置隔离，支持本地上传&所有符合S3标准（阿里云、华为云、MinIO等）的对象存储
 
 ## 项目预览
