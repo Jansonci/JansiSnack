@@ -634,7 +634,9 @@ fun Info(
                     .background(color = Color.LightGray.copy(alpha = 0.3f))
                     .padding(horizontal = 5.dp, vertical = 2.dp)
             ) {
-                val correctedFontSize = if(text.toIntOrNull() != null) 14.sp else 13.sp
+                // 判断是否为英文字母
+                val isAlphabet = text.all { it.isLetter() && it.toString().matches("[a-zA-Z]".toRegex()) }
+                val correctedFontSize = if(text.toIntOrNull() != null || isAlphabet) 14.sp else 13.sp
                 Text(
                     text = text,
                     fontSize = correctedFontSize,
