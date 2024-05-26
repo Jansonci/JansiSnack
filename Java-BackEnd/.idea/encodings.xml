@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Api-commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Api-commons/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Api-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Api-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Dessert/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Dessert/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/Order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/User/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/User/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JansiSnack_BackEnd/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
