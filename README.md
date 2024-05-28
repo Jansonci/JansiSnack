@@ -41,7 +41,7 @@
      <tr>
        <td><img src="images/Edit.png"/></td>
        <td><img src="images/Search.png"/></td>
-       <td><img src="images/pay.png"/></td>
+       <td><img src="images/CateDeta.png"/></td>
     </tr>
 </table>
 
