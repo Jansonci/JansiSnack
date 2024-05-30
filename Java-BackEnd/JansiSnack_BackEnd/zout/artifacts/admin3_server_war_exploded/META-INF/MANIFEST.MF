@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: IntelliJ IDEA
-Built-By: Jansonci
-Build-Jdk: 17.0.8
-Implementation-Title: admin3-server
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: tech.wetech.admin3
-Main-Class: ${start-class}
-
