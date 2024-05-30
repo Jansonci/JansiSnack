@@ -5,13 +5,16 @@ spring:
   application:
     name: cloud-gateway #以微服务注册进consul或nacos服务列表内
   cloud:
-    consul: #配置consul地址
-#      host: 192.168.233.100
-      host: localhost
-      port: 8500
+#    consul: #配置consul地址
+##      host: 192.168.233.100
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        prefer-ip-address: true
+#        service-name: ${spring.application.name}
+    nacos:
       discovery:
-        prefer-ip-address: true
-        service-name: ${spring.application.name}
+        server-addr: localhost:8848
     gateway:
       routes:
         - id: pay_routh1 #pay_routh1                #路由的ID(类似mysql主键ID)，没有固定规则但要求唯一，建议配合服务名
