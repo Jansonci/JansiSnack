@@ -16,7 +16,6 @@
 
 package com.example.jetsnack.ui.home.News
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -24,7 +23,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.jetnews.data.posts.impl.post1
-import com.example.jetnews.data.postsRepository
 import com.example.jetsnack.R
 import com.example.jetsnack.api.DessertService
 import com.example.jetsnack.data.PostRepository
@@ -127,7 +125,6 @@ private data class HomeViewModelState(
  * ViewModel that handles the business logic of the Home screen
  */
 class HomeViewModel(
-//    private val postsRepository: PostsRepository,
     private val postRepository: PostRepository,
     preSelectedPostId: String?
 ) : ViewModel() {
@@ -174,18 +171,6 @@ class HomeViewModel(
 
     init {
         refreshPosts()
-        // Observe for favorite changes in the repo layer
-        viewModelScope.launch {
-            postsRepository.observeFavorites().collect { favorites ->
-                viewModelState.update { it.copy(favorites = favorites) }
-            }
-        }
-        Log.i("yyy" ,"HomeViewModel Created!")
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("yyy","HomeViewModel Destroyed")
     }
 
     /**
@@ -200,14 +185,10 @@ class HomeViewModel(
 
                 val response1 = DessertService.createFoeArticle().getAllArticles()
                 val responsePosts = response1.body() ?: listOf()
-
-                Log.i("logged",loggedInUser.toString())
                 // 修改每个post对象的isCollected属性，并创建一个新的列表
                 val updatedPosts = responsePosts.map { post ->
                     post.copy(isCollected = post.likes.contains(loggedInUser))
                 }
-                Log.i("updatedPosts", overallMessageMap.toString())
-
                // 将更新后的列表赋值给_posts.value
                 _posts.value = updatedPosts
                 val posts = response1.body() ?: listOf()
@@ -216,15 +197,12 @@ class HomeViewModel(
                 }
 
                 postRepository.upsertAllPosts(posts)
-
                 viewModelState.update {
                     when (response1.code()) {
                         200 -> {
                             it.copy(postsFeed = newPostsFeed.value, isLoading = false)
                         }
-
                         else -> {
-                            Log.i("AllResponse:", response1.code().toString())
                             val errorMessages = it.errorMessages + ErrorMessage(
                                 id = UUID.randomUUID().mostSignificantBits,
                                 messageId = R.string.load_error
@@ -234,7 +212,6 @@ class HomeViewModel(
                     }
                 }
             } else {
-                Log.i("NotEmpty:", postRepository.getPosts()?.get(0).toString())
                 _posts.value = postRepository.getPosts() ?: listOf()
                 viewModelState.update { it.copy(postsFeed = newPostsFeed.value, isLoading = false) }
             }
@@ -250,19 +227,10 @@ class HomeViewModel(
                     if (post != null) {
                         postRepository.insertPost(post)
                     }
-                    Log.i(
-                        "PostDetail",
-                        "Response: ***********************************************"
-                    )
-
                     if (response.isSuccessful) {
                         // 更新_postDetail状态
                         _postDetail.value = post
                         postt = post?: post1
-                        Log.i("postt", post?.title.toString()?:"")
-                        Log.i("postttt", _postDetail.value?.title.toString()?:"")
-                        Log.i("posttt", postt.toString())
-
                     } else {
                         // 处理错误情况，例如显示错误信息
                         // ...
@@ -282,61 +250,10 @@ class HomeViewModel(
             }
         }
     }
-
-    /**
-     * Toggle favorite of a post
-     */
-    fun toggleFavourite(postId: String) {
-        viewModelScope.launch {
-            postsRepository.toggleFavorite(postId)
-        }
-    }
-
-    /**
-     * Selects the given article to view more information about it.
-     */
-    fun selectArticle(postId: String) {
-        // Treat selecting a detail as simply interacting with it
-        interactedWithArticleDetails(postId)
-    }
-
-    /**
-     * Notify that an error was displayed on the screen
-     */
     fun errorShown(errorId: Long) {
         viewModelState.update { currentUiState ->
             val errorMessages = currentUiState.errorMessages.filterNot { it.id == errorId }
             currentUiState.copy(errorMessages = errorMessages)
-        }
-    }
-
-    /**
-     * Notify that the user interacted with the feed
-     */
-    fun interactedWithFeed() {
-        viewModelState.update {
-            it.copy(isArticleOpen = false)
-        }
-    }
-
-    /**
-     * Notify that the user interacted with the article details
-     */
-    fun interactedWithArticleDetails(postId: String) {
-        viewModelState.update {
-            it.copy(
-                selectedPostId = postId,
-                isArticleOpen = true
-            )
-        }
-    }
-
-    /**
-     * Notify that the user updated the search query
-     */
-    fun onSearchInputChanged(searchInput: String) {
-        viewModelState.update {
-            it.copy(searchInput = searchInput)
         }
     }
 

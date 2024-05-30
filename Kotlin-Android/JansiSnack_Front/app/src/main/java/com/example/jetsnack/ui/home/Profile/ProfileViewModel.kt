@@ -1,7 +1,6 @@
 package com.example.jetsnack.ui.home.Profile
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -39,11 +38,9 @@ class ProfileViewModel : ViewModel() {
                 val collections = DessertService.create().findCollections(loggedInUser)
                 val orderForChecks = DessertService.create().getOrders(loggedInUser)
                 if (response.isSuccessful) {
-                    Log.i("Useree", response.body().toString())
                     _userInfo.value = response.body()  // 这里你直接得到 JsonElement
                 } else {
                     // 处理错误响应
-                    Log.e("Error", response.code().toString())
                 }
                 if (collections.isSuccessful) {
                     val updatedPosts = collections.body()?.map { post ->
@@ -52,17 +49,14 @@ class ProfileViewModel : ViewModel() {
                     _collections.value = updatedPosts  // 这里你直接得到 JsonElement
                 } else {
                     // 处理错误响应
-                    Log.e("Error", response.code().toString())
                 }
                 if (orderForChecks.isSuccessful) {
                     _orderForChecks.value = orderForChecks.body()  // 这里你直接得到 JsonElement
                 } else {
                     // 处理错误响应
-                    Log.e("Error", response.code().toString())
                 }
             } catch (e: Exception) {
                 // 处理网络异常等
-                Log.e("Network error", e.toString())
             }
         }
     }

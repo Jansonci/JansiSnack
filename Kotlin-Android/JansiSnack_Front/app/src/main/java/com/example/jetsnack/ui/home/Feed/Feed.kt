@@ -254,7 +254,7 @@ fun rememberFeedTabContent(
     }
 
     val peopleProfileSections = FeedTabContent(FeedSections.People) {
-        HomeRoute(homeViewModel = homeViewModel, onPostSelected, isExpandedScreen = false, openDrawer = { /*TODO*/ })
+        HomeRoute(homeViewModel = homeViewModel, onPostSelected, openDrawer = { /*TODO*/ })
     }
 
     val publicationProfileSections = FeedTabContent(FeedSections.Publications) {

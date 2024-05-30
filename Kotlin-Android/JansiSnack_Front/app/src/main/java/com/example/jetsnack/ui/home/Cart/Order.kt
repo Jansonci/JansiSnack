@@ -67,7 +67,7 @@ fun Order(
     modifier: Modifier = Modifier,
     ) {
     val jetsnackScaffoldState = rememberJetsnackScaffoldState()
-    val cartViewModel1: CartViewModel1 = viewModel(factory = CartViewModel1.provideFactory(orderTd))
+    val cartViewModel1: CartViewModel = viewModel(factory = CartViewModel.provideFactory(orderTd))
     val orderLines: State<List<CartDetail>?> = cartViewModel1.orderLines
 
     JetsnackScaffold(

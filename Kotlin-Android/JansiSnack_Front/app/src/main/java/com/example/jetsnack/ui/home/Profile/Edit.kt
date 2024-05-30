@@ -78,15 +78,25 @@ fun Edit1(upPress:()->Unit,
 fun EditContent(onNavigateToEditSpec: (String, String) -> Unit,
                 profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
+    val userInfo = profileViewModel.userInfo.value?.asJsonObject
+    val infoItems = listOf(
+        "昵称" to userInfo?.get("username")?.takeIf { it !is JsonNull }?.asString.orEmpty(),
+        "性别" to userInfo?.get("gender")?.takeIf { it !is JsonNull }?.asString.orEmpty(),
+        ("个性签名" to userInfo?.get("motto")?.takeIf { it !is JsonNull }?.asString),
+        "年龄" to userInfo?.get("age")?.takeIf { it !is JsonNull }?.asString.orEmpty(),
+        "所在地" to userInfo?.get("locale")?.takeIf { it !is JsonNull }?.asString.orEmpty(),
+        "职业" to userInfo?.get("job")?.takeIf { it !is JsonNull }?.asString.orEmpty()
+    )
     LazyColumn {
-        item { EditPhoto(profileViewModel) }
-        item { Info(title = "昵称", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("username")?.takeIf { it !is JsonNull }?.asString ?:"", onNavigateToEditSpec) }
-        item { Info(title = "性别", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("gender")?.takeIf { it !is JsonNull }?.asString ?:"", onNavigateToEditSpec) }
-        item { Info(title = "个性签名", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("motto")?.takeIf { it !is JsonNull }?.asString ?:"11",onNavigateToEditSpec) }
-        item { Info(title = "年龄", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("age")?.takeIf { it !is JsonNull }?.asString ?:"",onNavigateToEditSpec) }
-        item { Info(title = "所在地", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("locale")?.takeIf { it !is JsonNull }?.asString ?:"",onNavigateToEditSpec) }
-        item { Info(title = "职业", titleValue = profileViewModel.userInfo.value?.asJsonObject?.get("job")?.takeIf { it !is JsonNull }?.asString ?:"",onNavigateToEditSpec) }
 
+        item { EditPhoto(profileViewModel) }
+        infoItems.forEach { (title, value) ->
+            item {
+                if (value != null) {
+                    Info(title = title, titleValue = value, onNavigateToEditSpec = onNavigateToEditSpec)
+                }
+            }
+        }
 
     }
 }

@@ -21,8 +21,6 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,7 +32,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import androidx.room.Room
-import com.example.jetnews.data.collections.impl.favorites
 import com.example.jetnews.ui.article.ArticleScreen
 import com.example.jetsnack.data.AppDatabase
 import com.example.jetsnack.data.PostDao
@@ -147,14 +144,11 @@ private fun NavGraphBuilder.jetsnackNavGraph(
     ){backStackEntry ->
         val arguments = requireNotNull(backStackEntry.arguments)
         val postId = arguments.getString(MainDestinations.POST_ID_KEY)
-        val favorites1 by favorites.collectAsState()
-        val isFavorite = favorites1.map { post -> post.id }.contains(postId)
         if (postId != null) {
             ArticleScreen(
                 postId = postId,
                 isExpandedScreen = false,
                 onBack = upPress,
-                isFavorite = isFavorite ,
                 postDao
                 )
         }

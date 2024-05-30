@@ -18,7 +18,6 @@ package com.example.jetsnack.di
 import android.content.Context
 import com.example.jetsnack.data.AppDatabase
 import com.example.jetsnack.data.DessertDao
-import com.example.jetsnack.data.DessertIngredientsDao
 import com.example.jetsnack.data.PostDao
 import dagger.Module
 import dagger.Provides
@@ -45,9 +44,5 @@ class DatabaseModule {
     @Provides
     fun providePostDao(appDatabase: AppDatabase): PostDao {
         return appDatabase.postDao()
-    }
-    @Provides
-    fun provideGardenPlantingDao(appDatabase: AppDatabase): DessertIngredientsDao {
-        return appDatabase.dessertIngredientsDao()
     }
 }

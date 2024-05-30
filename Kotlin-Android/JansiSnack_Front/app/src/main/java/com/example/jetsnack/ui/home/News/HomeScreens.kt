@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.CircularProgressIndicator
@@ -83,12 +82,10 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 fun HomeFeedScreen(
     uiState: HomeUiState,
     showTopAppBar: Boolean,
-    onToggleFavorite: (String) -> Unit,
     onSelectPost: (String) -> Unit,
     onRefreshPosts: () -> Unit,
     onErrorDismiss: (Long) -> Unit,
     openDrawer: () -> Unit,
-    homeListLazyListState: LazyListState,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
 ) {
@@ -104,13 +101,10 @@ fun HomeFeedScreen(
     ) { hasPostsUiState, contentPadding, contentModifier ->
         PostList(
             postsFeed = hasPostsUiState.postsFeed,
-            favorites = hasPostsUiState.favorites,
             showExpandedSearch = !showTopAppBar,
             onArticleTapped = onSelectPost,
-            onToggleFavorite = onToggleFavorite,
             contentPadding = contentPadding,
             modifier = contentModifier,
-            state = homeListLazyListState,
             webSocketViewModel = webSocketViewModel1
         )
     }
@@ -269,14 +263,11 @@ private fun LoadingContent(
 @Composable
 private fun PostList(
     postsFeed: PostsFeed,
-    favorites: Set<String>,
     showExpandedSearch: Boolean,
     onArticleTapped: (postId: String) -> Unit,
-    onToggleFavorite: (String) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     webSocketViewModel: WebSocketViewModel,
-    state: LazyListState = rememberLazyListState(),
 ) {
     val listState = rememberLazyListState()
     // 当组件首次加载时，尝试恢复滑动位置
@@ -293,9 +284,9 @@ private fun PostList(
             item {
                 PostListSimpleSection(
                     postsFeed.recommendedPosts,
-                    onArticleTapped,
-                    favorites,
-                    onToggleFavorite,
+//                    onArticleTapped,
+//                    favorites,
+//                    onToggleFavorite,
                     webSocketViewModel
                 )
             }
@@ -366,9 +357,9 @@ private fun PostListTopSection(post: Post, navigateToArticle: (String) -> Unit) 
 @Composable
 private fun PostListSimpleSection(
     posts: List<Post>,
-    navigateToArticle: (String) -> Unit,
-    favorites: Set<String>,
-    onToggleFavorite: (String) -> Unit,
+//    navigateToArticle: (String) -> Unit,
+//    favorites: Set<String>,
+//    onToggleFavorite: (String) -> Unit,
     webSocketViewModel: WebSocketViewModel
 ) {
     // 处理WebSocket消息的解析和更新一次，而不是在每个PostCardSimple中处理

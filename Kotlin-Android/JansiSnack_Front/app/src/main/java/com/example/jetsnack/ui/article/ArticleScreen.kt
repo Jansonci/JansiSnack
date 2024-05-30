@@ -18,7 +18,6 @@ package com.example.jetnews.ui.article
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -58,13 +57,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.jetnews.data.Result
-import com.example.jetnews.data.posts.impl.BlockingFakePostsRepository
-import com.example.jetnews.data.posts.impl.post3
 import com.example.jetsnack.R
 import com.example.jetsnack.api.WebSocketViewModel
 import com.example.jetsnack.data.PostDao
@@ -75,7 +69,6 @@ import com.example.jetsnack.ui.home.News.HomeViewModel
 import com.example.jetsnack.ui.home.Profile.loggedInUser
 import com.example.jetsnack.ui.home.overallMessageMap
 import com.example.jetsnack.ui.home.updateMap
-import com.example.jetsnack.ui.theme.JetsnackTheme
 import com.example.jetsnack.ui.utils.BookmarkButton
 import com.example.jetsnack.ui.utils.FavoriteButton
 import com.example.jetsnack.ui.utils.FunctionalityNotAvailablePopup
@@ -83,7 +76,6 @@ import com.example.jetsnack.ui.utils.ShareButton
 import com.example.jetsnack.ui.utils.TextSettingsButton
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.runBlocking
 
 /**
  * Stateless Article Screen that displays a single post adapting the UI to different screen sizes.
@@ -101,7 +93,6 @@ fun ArticleScreen(
     postId: String,
     isExpandedScreen: Boolean,
     onBack: () -> Unit,
-    isFavorite: Boolean,
     postDao: PostDao,
     modifier: Modifier = Modifier,
     lazyListState: LazyListState = rememberLazyListState(),
@@ -301,31 +292,4 @@ fun sharePost(post: Post, context: Context) {
     )
 }
 
-@Preview("Article screen")
-@Preview("Article screen (dark)", uiMode = UI_MODE_NIGHT_YES)
-@Preview("Article screen (big font)", fontScale = 1.5f)
-@Composable
-fun PreviewArticleDrawer() {
-    JetsnackTheme {
-        val post = runBlocking {
-            (BlockingFakePostsRepository().getPost(post3.id) as Result.Success).data
-        }
-//        ArticleScreen("post", false, {}, false)
-    }
-}
 
-@Preview("Article screen navrail", device = Devices.PIXEL_C)
-@Preview(
-    "Article screen navrail (dark)",
-    uiMode = UI_MODE_NIGHT_YES,
-    device = Devices.PIXEL_C
-)
-@Preview("Article screen navrail (big font)", fontScale = 1.5f, device = Devices.PIXEL_C)
-@Composable
-fun PreviewArticleNavRail() {
-    JetsnackTheme {
-        runBlocking {
-            (BlockingFakePostsRepository().getPost(post3.id) as Result.Success).data
-        }
-    }
-}

@@ -82,8 +82,6 @@ class FeedViewModel @Inject constructor(private val dessertRepository: DessertRe
                     if (response2.isSuccessful) {
                         // 更新_dessertDetail状态
                         _categories.value = response2.body()
-                        Log.i("Dessertsss", "Response: ${categories.value?.get(0)?.imageUrl}")
-
                     } else {
                         // 处理错误情况，例如显示错误信息
                         // ...

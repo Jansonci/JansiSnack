@@ -19,7 +19,6 @@ import com.example.jetsnack.ui.home.News.HomeViewModel
 fun HomeRoute(
     homeViewModel: HomeViewModel,
     onPostSelected: (String) -> Unit,
-    isExpandedScreen: Boolean,
     openDrawer: () -> Unit,
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
 ) {
@@ -27,13 +26,9 @@ fun HomeRoute(
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
     HomeRoute(
         uiState = uiState,
-        isExpandedScreen = isExpandedScreen,
-        onToggleFavorite = { homeViewModel.toggleFavourite(it) },
         onSelectPost = onPostSelected,
         onRefreshPosts = { homeViewModel.refreshPosts(true) },
         onErrorDismiss = { homeViewModel.errorShown(it) },
-        onInteractWithFeed = { homeViewModel.interactedWithFeed() },
-        onInteractWithArticleDetails = { homeViewModel.interactedWithArticleDetails(it) },
         openDrawer = openDrawer,
         snackbarHostState = snackbarHostState,
     )
@@ -59,13 +54,9 @@ fun HomeRoute(
 @Composable
 fun HomeRoute(
     uiState: HomeUiState,
-    isExpandedScreen: Boolean,
-    onToggleFavorite: (String) -> Unit,
     onSelectPost: (String) -> Unit,
     onRefreshPosts: () -> Unit,
     onErrorDismiss: (Long) -> Unit,
-    onInteractWithFeed: () -> Unit,
-    onInteractWithArticleDetails: (String) -> Unit,
     openDrawer: () -> Unit,
     snackbarHostState: SnackbarHostState,
 
@@ -73,7 +64,6 @@ fun HomeRoute(
     // Construct the lazy list states for the list and the details outside of deciding which one to
     // show. This allows the associated state to survive beyond that decision, and therefore
     // we get to preserve the scroll throughout any changes to the content.
-    val homeListLazyListState = rememberLazyListState()
     when (uiState) {
         is HomeUiState.HasPosts -> uiState.postsFeed.allPosts
         is HomeUiState.NoPosts -> emptyList()
@@ -86,12 +76,10 @@ fun HomeRoute(
             HomeFeedScreen(
                 uiState = uiState,
                 showTopAppBar = showTopAppBar,
-                onToggleFavorite = onToggleFavorite,
                 onSelectPost = onSelectPost,
                 onRefreshPosts = onRefreshPosts,
                 onErrorDismiss = onErrorDismiss,
                 openDrawer = openDrawer,
-                homeListLazyListState = homeListLazyListState,
                 snackbarHostState = snackbarHostState,
             )
         }

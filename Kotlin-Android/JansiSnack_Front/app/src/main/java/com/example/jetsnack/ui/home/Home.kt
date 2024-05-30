@@ -77,7 +77,7 @@ import com.example.jetsnack.data.PostDao
 import com.example.jetsnack.data.PostRepository
 import com.example.jetsnack.model.Kygo
 import com.example.jetsnack.ui.components.JetsnackSurface
-import com.example.jetsnack.ui.home.Cart.Cartt
+import com.example.jetsnack.ui.home.Cart.Cart
 import com.example.jetsnack.ui.home.Feed.Feed
 import com.example.jetsnack.ui.home.Feed.FeedViewModel
 import com.example.jetsnack.ui.home.News.HomeViewModel
@@ -128,7 +128,7 @@ fun NavGraphBuilder.addHomeGraph(
     }
 
     composable(HomeSections.CART.route + "/{prevSelection}") { from ->
-        Cartt(
+        Cart(
             onSnackClick = { id -> onSnackSelected(id, from) },
             onNavigateToRoute = onNavigateToRoute,
             onNavigateToOrder = onNavigateToOrder,

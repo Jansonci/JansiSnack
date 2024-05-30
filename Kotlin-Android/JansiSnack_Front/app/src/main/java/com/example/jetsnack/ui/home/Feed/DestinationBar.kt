@@ -16,7 +16,6 @@
 
 package com.example.jetsnack.ui.home.Feed
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides.Companion.Horizontal
 import androidx.compose.foundation.layout.WindowInsetsSides.Companion.Top
@@ -82,36 +81,4 @@ fun DestinationBar(
 
     JetsnackDivider()
 }
-
-@Composable
-fun DestinationOptionBar(
-    option: String,
-    choose: (String) -> Unit = {},
-    close: () -> Unit,
-    modifier: Modifier=Modifier,
-) {
-    TopAppBar(
-        backgroundColor = JetsnackTheme.colors.uiBackground.copy(alpha = AlphaNearOpaque),
-        contentColor = JetsnackTheme.colors.textSecondary,
-        contentPadding = WindowInsets.systemBars.only(Horizontal + Top).asPaddingValues(),
-        elevation = 0.dp,
-        modifier = modifier.clickable { choose(option)
-                                         close() }
-    ) {
-        Text(
-            text = option,
-            style = MaterialTheme.typography.subtitle1,
-            color = JetsnackTheme.colors.textSecondary,
-            textAlign = TextAlign.Start,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier
-                .weight(1f)
-                .align(Alignment.CenterVertically)
-                .padding(start = 25.dp)
-        )
-    }
-    JetsnackDivider()
-}
-
 

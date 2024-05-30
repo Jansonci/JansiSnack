@@ -33,7 +33,6 @@ import com.example.jetsnack.model.Post
 @Database(entities = [Dessert::class, Category::class, Lifestyle::class, Post::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun dessertIngredientsDao(): DessertIngredientsDao
     abstract fun dessertDao(): DessertDao
     abstract fun postDao(): PostDao
 

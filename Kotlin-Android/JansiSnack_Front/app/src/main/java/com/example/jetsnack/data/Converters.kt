@@ -23,18 +23,12 @@ import com.example.jetsnack.model.Publication
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import java.util.Calendar
 
 /**
  * Type converters to allow Room to reference complex data types.
  */
 class Converters {
     private val gson = Gson()
-
-    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
-
-    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
-        Calendar.getInstance().apply { timeInMillis = value }
 
     @TypeConverter
     fun fromString(value: String): List<String> {

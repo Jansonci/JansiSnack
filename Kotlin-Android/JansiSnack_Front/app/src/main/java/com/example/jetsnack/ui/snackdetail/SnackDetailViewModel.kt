@@ -20,7 +20,6 @@ import javax.inject.Inject
 class SnackDetailViewModel @Inject constructor(private val dessertRepository: DessertRepository): ViewModel() {
     private val _dessertDetail = mutableStateOf<Dessert?>(null)
     val dessertDetail: State<Dessert?> = _dessertDetail
-
     private val viewModelScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     @RequiresApi(Build.VERSION_CODES.O)
