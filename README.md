@@ -66,7 +66,10 @@
 
 - 通过git下载源码
 - 创建数据库dessert和orderservice，数据库编码为UTF8mb4
-- 修改application.yml文件，更改MySQL账号和密码
+- 修改所有Java微服务中的application.yml文件，更改MySQL账号和密码，redis以及Kafka端口
+- 修改Nginx配置文件upstream httpget部分的Server端口为你的主机ip地址
+- 修改Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/api/DessertService.kt目录下的BASE_URL和ARTICLE_BASE_URL，分别修改成你的主机ip地址
+- 本地（或虚拟机）启动Nacos、redis、Kafka、Nginx（请注意Nacos和Kafka为单机模式）
 
 ## 待办列表
 
