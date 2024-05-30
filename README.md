@@ -5,7 +5,7 @@
 一个简单的甜品购买app，提供常见的电商和新闻资讯类应用功能。
 
 ## 主要特性
-* 后端使用SpringBoot3.0、SpringCloud、Golang Echo等主流框架构建
+* 后端使用SpringBoot、SpringCloud、Golang Echo等主流框架构建
 * 前端使用Android JetPack Compose基于安卓官方案例JetSnack拓展开发实现
 * 使用Material/Material3混合进行界面设计并使用Room数据库实现应用端缓存
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
@@ -66,7 +66,10 @@
 
 - 通过git下载源码
 - 创建数据库dessert和orderservice，数据库编码为UTF8mb4
-- 修改application.yml文件，更改MySQL账号和密码
+- 修改所有Java微服务中的application.yml文件，更改MySQL账号和密码，redis以及Kafka端口
+- 修改Nginx配置文件upstream httpget部分的Server端口为你的主机ip地址
+- 修改Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/api/DessertService.kt目录下的BASE_URL和ARTICLE_BASE_URL，分别修改成你的主机ip地址
+- 本地（或虚拟机）启动Nacos、redis、Kafka、Nginx（请注意Nacos和Kafka为单机模式）
 
 ## 待办列表
 
