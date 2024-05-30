@@ -1,5 +1,4 @@
 package com.example.jetsnack.api
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
@@ -17,7 +16,6 @@ class WebSocketViewModel : ViewModel() {
 
     init {
         connectWebSocket()
-        Log.i("yyy", "WebSocketViewModel Created")
     }
 
     private fun connectWebSocket() {
@@ -40,13 +38,10 @@ class WebSocketViewModel : ViewModel() {
                             messageChannel.send("Connection failed: ${t.message}")
                             retryConnection()
                         }
-                        // 重试连接
                     }
                 })
                 this@WebSocketViewModel.webSocketClient.start("ws://10.0.2.2:8080/article/websocket")
             } catch (e: Exception) {
-                Log.e("WebSocketError", "Failed to connect: ${e.message}")
-//                messageChannel.send("Failed to connect: ${e.message}")
                 retryConnection()
             }
         }
@@ -59,12 +54,10 @@ class WebSocketViewModel : ViewModel() {
 
     fun sendMessage(message: String) {
         this.webSocketClient.send(message)
-        Log.i("yyysending", message)
     }
 
     override fun onCleared() {
         super.onCleared()
         this.webSocketClient.close()
-        Log.i("yyy", "WebSocketViewModel Destroyed")
     }
 }
