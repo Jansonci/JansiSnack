@@ -10,7 +10,7 @@
 * 使用Material/Material3混合进行界面设计并使用Room数据库实现应用端缓存
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
 * 提供登录注册功能，并使用MD5进行密码加密
-* 使用Redis实现业务数据的缓存、购物车模型以及分布式锁
+* 使用Redis实现甜品数据的缓存、购物车模型以及分布式锁
 * 使用Kafka实现订单的实时高速处理
 * 使用Nginx作为反向代理服务器实现静态资源的存储、缓存以及请求限流
 * 调用Google和Baidu的api实现定位功能
@@ -41,7 +41,7 @@
      <tr>
        <td><img src="images/Edit.png"/></td>
        <td><img src="images/Search.png"/></td>
-       <td><img src="images/pay.png"/></td>
+       <td><img src="images/CateDeta.png"/></td>
     </tr>
 </table>
 
