@@ -5,7 +5,7 @@
 一个简单的甜品购买app，提供常见的电商和新闻资讯类应用功能。
 
 ## 主要特性
-* 后端使用SpringBoot3.0、SpringCloud、Golang Echo等主流框架构建
+* 后端使用SpringBoot、SpringCloud、Golang Echo等主流框架构建
 * 前端使用Android JetPack Compose基于安卓官方案例JetSnack拓展开发实现
 * 使用Material/Material3混合进行界面设计并使用Room数据库实现应用端缓存
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
