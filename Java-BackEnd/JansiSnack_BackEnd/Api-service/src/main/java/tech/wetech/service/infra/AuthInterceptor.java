@@ -15,13 +15,7 @@ import tech.wetech.api.common.authz.RequiresPermissions;
 import tech.wetech.api.dto.UserinfoDTO;
 import tech.wetech.service.service.SessionService;
 
-
-/**
- * @author cjbi
- * 未使用
- */
 public class AuthInterceptor implements HandlerInterceptor {
-
   private final SessionService sessionService;
   private final Logger log = LoggerFactory.getLogger(getClass());
 

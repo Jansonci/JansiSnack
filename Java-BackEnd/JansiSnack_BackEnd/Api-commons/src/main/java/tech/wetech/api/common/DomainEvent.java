@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 
 /**
  * 事件原型
+ * @author Jansonci
  */
 public interface DomainEvent {
 

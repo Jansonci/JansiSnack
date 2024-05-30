@@ -23,6 +23,7 @@ import java.util.Set;
  * to the file <tt>aFile.txt</tt> in order for the <tt>someMethod()</tt> to execute, otherwise
  * an Exception will be thrown.
  *
+ * @author Jansonci
  * @since 0.1
  */
 @Target({ElementType.TYPE, ElementType.METHOD})

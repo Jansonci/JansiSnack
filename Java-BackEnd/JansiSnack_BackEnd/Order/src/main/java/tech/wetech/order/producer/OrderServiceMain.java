@@ -21,7 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EntityScan("tech.wetech.order.producer.model")
 @MapperScan("tech.wetech.order.producer.mapper")
-@ComponentScan(basePackages = {"tech.wetech.api","tech.wetech.order.producer"})
+@ComponentScan(basePackages = {"tech.wetech.api","tech.wetech.order.producer", "tech.wetech.service"})
 @EnableFeignClients(basePackages = "tech.wetech.api.apis")
 @EnableDiscoveryClient //该注解用于向使用consul为注册中心时注册服务
 public class OrderServiceMain {

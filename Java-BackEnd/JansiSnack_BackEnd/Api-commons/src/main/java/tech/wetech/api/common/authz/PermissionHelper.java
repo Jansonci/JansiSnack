@@ -19,6 +19,7 @@ permissions字符串数组。首先在isPermitted方法中会根据逻辑需求�
 属性之间的关系，若p1.implies(p2)返回true，则说明：当p1.parts.size<=p2.parts.size时，则p1.parts中的每个Set<String>集合都完全包含p2.parts中相同
 位置上对应的Set<String>集合；当p1.parts.size>p2.parts.size时，则除p1.parts中的每个Set<String>集合都完全包含p2.parts中相同位置上对应的
 Set<String>集合外，p1.parts中多于p2.parts的那部分List<Set<String>>中的每一个Set<String>都必须包含有通配符WILDCARD_TOKEN。
+ * @author Jansonci
  */
 public class PermissionHelper {
   public static boolean isPermitted(Set<String> permissions, String[] value, Logical logical) {

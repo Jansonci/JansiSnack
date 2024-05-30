@@ -1,5 +1,9 @@
 package tech.wetech.api.common;
 
+/**
+ * @author Jansonci
+ */
+
 public enum CommonResultStatus implements ResultStatus {
   OK(1000, "成功"),
 

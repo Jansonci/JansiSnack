@@ -100,7 +100,7 @@ public class LocalSessionManager implements SessionManager {
     }
   }
   @Override
-  @Transactional
+  @Transactional(rollbackFor = Exception.class)
   // 刷新会话库存中的所有会话
   public void refresh() {
     sessionRepository.findAllStream().forEach(session -> {
