@@ -82,7 +82,7 @@ fun JetsnackApp() {
                     onNavigateToOrder =  jetsnackNavController::navigateToOrder,
                     feedViewModel,
                     postDao,
-                )// NavHost里面包NavGraph，NavHost本质上就是个工具人，关键在于NavHost内的composable块
+                )  // NavHost里面包NavGraph，NavHost本质上就是个工具人，关键在于NavHost内的composable块
             }
         }
     }
