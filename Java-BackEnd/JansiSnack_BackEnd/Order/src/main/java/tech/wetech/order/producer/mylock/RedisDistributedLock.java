@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * @author Jansonci
+ */
 public class RedisDistributedLock implements Lock
 {
     private StringRedisTemplate stringRedisTemplate;

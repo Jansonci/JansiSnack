@@ -9,7 +9,6 @@ import java.util.concurrent.locks.Lock;
 
 /**
  * @author Jansonci
- * @create 2022-10-18 18:53
  */
 @Component
 public class  DistributedLockFactory
@@ -31,7 +30,7 @@ public class  DistributedLockFactory
         }
 
         if(lockType.equalsIgnoreCase("REDIS")){
-            lockName = "zzyyRedisLock";
+            lockName = "JansonciRedisLock";
             return new RedisDistributedLock(stringRedisTemplate,lockName,uuidValue);
         } else if(lockType.equalsIgnoreCase("ZOOKEEPER")){
             //TODO zookeeper版本的分布式锁实现
