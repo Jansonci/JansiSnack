@@ -106,7 +106,6 @@ private fun NavGraphBuilder.jetsnackNavGraph(
         route = MainDestinations.HOME_ROUTE,
         startDestination =
                 MainDestinations.LOGIN_ROUTE
-//        HomeSections.FEED.route+"/"
     ) {
         addHomeGraph(onSnackSelected, onPostSelected ,onCategorySelected,
             onNavigateToRoute, onNavigateToEdit, onNavigateToOrder, feedViewModel,
