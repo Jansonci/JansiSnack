@@ -1,19 +1,3 @@
-/*
- * Copyright 2020 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.jetsnack.ui
 
 import android.os.Build
@@ -32,11 +16,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import androidx.room.Room
-import com.example.jetnews.ui.article.ArticleScreen
 import com.example.jetsnack.data.AppDatabase
 import com.example.jetsnack.data.PostDao
+import com.example.jetsnack.ui.article.ArticleScreen
 import com.example.jetsnack.ui.home.Cart.Order
 import com.example.jetsnack.ui.home.Feed.FeedViewModel
+import com.example.jetsnack.ui.home.HomeSections
 import com.example.jetsnack.ui.home.Profile.Edit1
 import com.example.jetsnack.ui.home.Profile.EditSpec
 import com.example.jetsnack.ui.home.Search.CategoryDetail
@@ -105,7 +90,8 @@ private fun NavGraphBuilder.jetsnackNavGraph(
     navigation(
         route = MainDestinations.HOME_ROUTE,
         startDestination =
-                MainDestinations.LOGIN_ROUTE
+        HomeSections.FEED.route+"/"
+//                MainDestinations.LOGIN_ROUTE
     ) {
         addHomeGraph(onSnackSelected, onPostSelected ,onCategorySelected,
             onNavigateToRoute, onNavigateToEdit, onNavigateToOrder, feedViewModel,

@@ -22,10 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="013294ec-98ac-45bd-af48-e710fa1307fc" name="Default Changelist" comment="清除了无效注解">
-      <change beforePath="$PROJECT_DIR$/../../Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/di/NetworkModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/di/NetworkModule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/ui/home/Feed/Feed.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Kotlin-Android/JansiSnack_Front/app/src/main/java/com/example/jetsnack/ui/home/Feed/Feed.kt" afterDir="false" />
-    </list>
+    <list default="true" id="013294ec-98ac-45bd-af48-e710fa1307fc" name="Default Changelist" comment="清除了无效注解" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

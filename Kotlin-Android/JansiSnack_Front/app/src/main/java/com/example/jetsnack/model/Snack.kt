@@ -16,7 +16,7 @@
 
 package com.example.jetsnack.model
 
-import androidx.compose.runtime.Immutable
+import javax.annotation.concurrent.Immutable
 
 @Immutable
 data class Snack(

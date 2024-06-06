@@ -16,6 +16,7 @@
 
 package com.example.jetsnack.ui.home.Profile
 
+import androidx.compose.ui.text.TextStyle
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -70,7 +71,6 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
@@ -233,7 +233,7 @@ fun Profile(
                             )
                             Text(
                                 text = "获赞",
-                                style = TextStyle(fontSize = 15.sp),
+                                style = androidx.compose.ui.text.TextStyle(fontSize = 15.sp),
                                 modifier = Modifier
                                     .weight(1f)
                                     .padding(5.dp)

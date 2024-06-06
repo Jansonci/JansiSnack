@@ -13,9 +13,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * @auther zzyy
- * @create 2023-12-31 11:11
  * 需求说明：自定义配置会员等级userTpye，按照钻/金/银和yml配置的会员等级，以适配是否可以访问
+ * @author Jansonci
  */
 @Component
 public class MyRoutePredicateFactory extends AbstractRoutePredicateFactory<MyRoutePredicateFactory.Config>

@@ -18,5 +18,4 @@ func (h *Handler) Register(g *echo.Group) {
 	articleGlobal.POST("/collections", h.GetArticles)
 	articleGlobal.Static("/pics", "media")
 	articleGlobal.GET("/websocket", h.HelloWebSocket1)
-
 }
