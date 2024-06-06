@@ -17,7 +17,6 @@
 package com.example.jetsnack.ui.home.Feed
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
@@ -96,10 +95,6 @@ fun Feed(
     modifier: Modifier,
     prevSelection : String,
     ) {
-    Log.i(
-        "Dessertsees",
-        feedViewModel.snackCollections.value.mapNotNull{ it.value }.size.toString()
-    )
     val snackCollections = remember {
         feedViewModel.snackCollections.value.mapNotNull { it.value }
     }
