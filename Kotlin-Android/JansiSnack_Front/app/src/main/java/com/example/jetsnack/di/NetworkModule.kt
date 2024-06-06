@@ -1,5 +1,7 @@
 package com.example.jetsnack.di
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.jetsnack.api.DessertService
 import dagger.Module
 import dagger.Provides
@@ -11,6 +13,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
     fun provideUnsplashService(): DessertService {
