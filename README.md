@@ -6,7 +6,7 @@
 
 ## 主要特性
 * 后端使用SpringBoot、SpringCloud、Golang Echo等主流框架构建
-* UI使用Jetpack Compose开发实现,遵循MVVM架构
+* UI使用Jetpack Compose开发实现并遵循MVVM架构
 * 使用Retrofit实现前后端的数据交互并使用Room数据库实现应用端缓存
 * 持久层使用SpringData JPA结合Mybatis Plus混合开发，能够支持多种数据库适配
 * 提供登录注册功能，并使用MD5进行密码加密
