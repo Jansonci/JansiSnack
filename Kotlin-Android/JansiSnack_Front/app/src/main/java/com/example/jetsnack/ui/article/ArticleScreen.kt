@@ -61,16 +61,6 @@ import com.example.jetsnack.ui.utils.TextSettingsButton
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
-/**
- * Stateless Article Screen that displays a single post adapting the UI to different screen sizes.
- *
- * @param post (state) item to display
- * @param showNavigationIcon (state) if the navigation icon should be shown
- * @param onBack (event) request navigate back
- * @param isFavorite (state) is this item currently a favorite
- * @param onToggleFavorite (event) request that this post toggle it's favorite state
- * @param lazyListState (state) the [LazyListState] for the article content
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleScreen(
@@ -165,13 +155,6 @@ fun ArticleScreen(
     }
 }
 
-/**
- * Stateless Article Screen that displays a single post.
- *
- * @param post (state) item to display
- * @param navigationIconContent (UI) content to show for the navigation icon
- * @param bottomBarContent (UI) content to show for the bottom bar
- */
 @ExperimentalMaterial3Api
 @Composable
 private fun ArticleScreenContent(
@@ -233,11 +216,6 @@ private fun TopAppBar(
     )
 }
 
-/**
- * Display a popup explaining functionality not available.
- *
- * @param onDismiss (event) request the popup be dismissed
- */
 @Composable
 private fun FunctionalityNotAvailablePopup(onDismiss: () -> Unit) {
     AlertDialog(
@@ -256,12 +234,6 @@ private fun FunctionalityNotAvailablePopup(onDismiss: () -> Unit) {
     )
 }
 
-/**
- * Show a share sheet for a post
- *
- * @param post to share
- * @param context Android context to show the share sheet in
- */
 fun sharePost(post: Post, context: Context) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
